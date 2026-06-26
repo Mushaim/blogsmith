@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 type Article = {
   primaryKeyword: string; secondaryKeywords: string[]; outline: string[];
@@ -30,6 +30,35 @@ function mdToHtml(md: string): string {
 }
 
 const STEPS = ["🔎 Researcher — keywords & angle", "✍️ Writer — drafts the article", "📈 SEO — meta, slug, tags, links"];
+const LOADING_STEPS = ["🔎 Researching keywords & angle", "✍️ Writing the article", "📈 Optimizing SEO — meta, slug, tags & links"];
+
+// Stepped loader — advances through the pipeline phases so the wait feels alive.
+function StepLoader({ steps }: { steps: string[] }) {
+  const [i, setI] = useState(0);
+  useEffect(() => {
+    setI(0);
+    const t = setInterval(() => setI((x) => Math.min(x + 1, steps.length - 1)), 2600);
+    return () => clearInterval(t);
+  }, [steps]);
+  return (
+    <div className="card sans mb-6 space-y-3 p-5">
+      {steps.map((s, idx) => (
+        <div key={s} className="flex items-center gap-3 text-sm transition-opacity" style={{ opacity: idx <= i ? 1 : 0.35 }}>
+          {idx < i ? (
+            <span className="text-green-700">✓</span>
+          ) : idx === i ? (
+            <span className="inline-block h-4 w-4 animate-spin rounded-full border-2 border-[var(--color-accent)] border-t-transparent" />
+          ) : (
+            <span className="inline-block h-4 w-4 rounded-full border-2 border-[var(--color-line)]" />
+          )}
+          <span style={{ color: idx === i ? "var(--color-accent)" : "var(--color-soft)", fontWeight: idx === i ? 600 : 400 }}>
+            {s}{idx === i ? "…" : ""}
+          </span>
+        </div>
+      ))}
+    </div>
+  );
+}
 
 export default function Home() {
   const [topic, setTopic] = useState("How small businesses can use AI chatbots for customer support");
@@ -68,11 +97,7 @@ export default function Home() {
         {err && <p className="text-sm text-red-600">{err}</p>}
       </div>
 
-      {loading && (
-        <div className="card sans mb-6 space-y-2 p-5">
-          {STEPS.map((s) => <p key={s} className="text-sm text-[var(--color-soft)]">⏳ {s}</p>)}
-        </div>
-      )}
+      {loading && <StepLoader steps={LOADING_STEPS} />}
 
       {article && (
         <>
