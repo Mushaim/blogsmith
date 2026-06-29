@@ -2,7 +2,7 @@
 
 Give it a topic (and optionally a keyword + brand), and BlogSmith runs a **research → write → SEO** pipeline that returns a publish-ready post: a ~900-word article plus a complete SEO pack — meta title, meta description, URL slug, tags, primary/secondary keywords, and embedded links.
 
-🔗 **Live demo:** https://blogsmith-mushaim-s-projects.vercel.app
+🔗 **Live:** https://blogsmith-mushaim-s-projects.vercel.app
 
 ## Why it exists
 Quality SEO content is slow to produce and easy to get generic. Most "AI writers" hand you freeform prose that you still have to structure, fact-shape, and wrap in metadata. I built BlogSmith (from a real blog-automation freelance pipeline) so a single input yields a *complete, structured deliverable* — article **and** the SEO scaffolding around it.

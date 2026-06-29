@@ -83,7 +83,7 @@ export default function Home() {
     <main className="mx-auto max-w-3xl px-5 py-12">
       <div className="mb-7">
         <h1 className="text-4xl font-bold">BlogSmith</h1>
-        <p className="sans mt-1 text-[var(--color-soft)]">A multi-agent pipeline: research → write → SEO. From a topic to a publish-ready, optimized blog post. <span className="chip">demo</span></p>
+        <p className="sans mt-1 text-[var(--color-soft)]">A multi-agent pipeline: research → write → SEO. From a topic to a publish-ready, optimized blog post.</p>
       </div>
 
       <div className="card sans mb-6 space-y-3 p-5">
